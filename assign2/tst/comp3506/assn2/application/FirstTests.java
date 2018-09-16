@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 
 import org.junit.Test;
 
+import comp3506.assn2.utils.Occurence;
 import comp3506.assn2.utils.Pair;
 
 /**
@@ -22,7 +23,7 @@ public class FirstTests {
 	 * @throws IllegalArgumentException 
 	 * @throws FileNotFoundException 
 	 */
-	@Test
+	//@Test
 	public void testAutoTesterOne() throws FileNotFoundException, IllegalArgumentException {
 		AutoTester at = new AutoTester("files/shakespeare.txt", "files/shakespeare-index.txt", "files/stop-words.txt");
 		for (String word : at.stopWords) {
@@ -30,12 +31,24 @@ public class FirstTests {
 		}
 	}
 	
-	@Test
+	//@Test
 	public void testAutoTesterTwo() throws FileNotFoundException, IllegalArgumentException {
 		AutoTester at = new AutoTester("files/shakespeare.txt", "files/shakespeare-index.txt", "files/stop-words.txt");
 		for (Pair section : at.sectionIndex) {
 			System.out.print(section.getLeftValue());
 			System.out.println(section.getRightValue());
 		}
+	}
+	
+	//@Test
+	public void testLoad() throws FileNotFoundException, IllegalArgumentException {
+		AutoTester at = new AutoTester("files/shakespeare.txt", "files/shakespeare-index.txt", "files/stop-words.txt");
+	}
+	
+	//@Test
+	public void testOccurance() {
+		for (Occurence iterable_element : AutoTester.processLine("The Complete Works of William Shakespeare", 0)) {
+			System.out.println(iterable_element);
+		};
 	}
 }
