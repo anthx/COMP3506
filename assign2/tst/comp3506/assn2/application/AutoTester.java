@@ -111,7 +111,7 @@ public class AutoTester implements Search {
 			e.printStackTrace();
 		}
 	}
-	static Occurence[] processLine(String line, int lineNumber) {
+	public static Occurence[] processLine(String line, int lineNumber) {
 		String[] words = line.trim().split(" ");
 		Occurence[] result = new Occurence[words.length];
 		int startingColumn = 1;

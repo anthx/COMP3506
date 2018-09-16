@@ -45,9 +45,9 @@ public class FirstTests {
 		AutoTester at = new AutoTester("files/shakespeare.txt", "files/shakespeare-index.txt", "files/stop-words.txt");
 	}
 	
-	//@Test
+	@Test
 	public void testOccurance() {
-		for (Occurence iterable_element : AutoTester.processLine("The Complete Works of William Shakespeare", 0)) {
+		for (Occurence iterable_element : AutoTester.processLine("The Complete Works of William Shakespeare Called William", 0)) {
 			System.out.println(iterable_element);
 		};
 	}

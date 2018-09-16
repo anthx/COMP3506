@@ -2,11 +2,19 @@
 Readme.md
 
 # Tasks
- - [x] Read Text -done
- - [x] Tokenise by line and word -done
- - [x] Send word, line, and character position found into some data structure -done
+ - [x] Read Text
+ - [x] Tokenise by line and word
+ - [x] Send word, line, and character position found into some data structure
  - [ ] Make data structure
-	 - [ ] List item
+	 - [ ] Create Trie classes
+	 - [ ] Create TrieNode methods
+	 - [ ] Create Trie methods
+- [ ] Implement Searching
+	- [ ]  WordCount
+- [ ] Document Stuff
+	- [ ] Justify?
+	- [ ] Time / Space complexity stuff?
+- [ ] Write Report
 
   
 
