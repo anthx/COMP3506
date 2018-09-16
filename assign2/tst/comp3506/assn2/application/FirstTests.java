@@ -40,12 +40,12 @@ public class FirstTests {
 		}
 	}
 	
-	//@Test
+	@Test
 	public void testLoad() throws FileNotFoundException, IllegalArgumentException {
 		AutoTester at = new AutoTester("files/shakespeare.txt", "files/shakespeare-index.txt", "files/stop-words.txt");
 	}
 	
-	@Test
+	//@Test
 	public void testOccurance() {
 		for (Occurence iterable_element : AutoTester.processLine("The Complete Works of William Shakespeare Called William", 0)) {
 			System.out.println(iterable_element);

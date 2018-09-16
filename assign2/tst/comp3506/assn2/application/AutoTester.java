@@ -100,8 +100,8 @@ public class AutoTester implements Search {
 			Trie theTrie = new Trie();
 			while ((line = bufferedReader.readLine()) != null) {
 				Occurence[] wordsOnLine = processLine(line, lineNumber);
-				for (Occurence occurence : wordsOnLine) {
-					//theTrie.addWord(occurence.getWord(), lineNumber, occurence.getStartingColumn());
+				for (Occurence word : wordsOnLine) {
+					theTrie.addWord(word.getWord(), lineNumber, word.getStartingColumn());
 				}
 				lineNumber++;
 			}
@@ -117,6 +117,7 @@ public class AutoTester implements Search {
 		int startingColumn = 1;
 		for (int j = 0; j < words.length; j++) {
 			String word = words[j];
+			//TODO Right here we need to check the work only contains alpha numeric characters and is not in Stop Words.
 			Occurence occurence = new Occurence(word, lineNumber, startingColumn);
 			startingColumn += word.length() + 1;
 			result[j] = occurence;
