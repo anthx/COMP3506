@@ -7,6 +7,11 @@ public class LinkedList<T> implements Iterator<Object> {
 	private ListNode<T> tail;
 	private int size;
 	private ListNode<T> current;
+	
+	public void append(T element) {
+		ListNode<T> aNode = new ListNode<>(element);
+		add(aNode);
+	}
 
 	public void add(ListNode<T> aNode) {
 		aNode.previous = this.tail;
