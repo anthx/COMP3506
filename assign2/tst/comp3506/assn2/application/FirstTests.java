@@ -46,9 +46,9 @@ public class FirstTests {
 	}
 	
 	//@Test
-	public void testOccurance() {
-		for (Occurence iterable_element : AutoTester.processLine("The Complete Works of William Shakespeare Called William", 0)) {
-			System.out.println(iterable_element);
-		};
-	}
+//	public void testOccurance() {
+//		for (Occurence iterable_element : AutoTester.processLine("The Complete Works of William Shakespeare Called William", 0)) {
+//			System.out.println(iterable_element);
+//		}
+//	}
 }

@@ -23,6 +23,7 @@ public class AutoTester implements Search {
 
 	String[] stopWords = new String[500];
 	Pair[] sectionIndex = new Pair[100];
+	Trie theTrie;
 
 	/**
 	 * Create an object that performs search operations on a document. If
@@ -97,12 +98,19 @@ public class AutoTester implements Search {
 
 			String line;
 			int lineNumber = 1;
-			Trie theTrie = new Trie();
+			theTrie = new Trie();
 			while ((line = bufferedReader.readLine()) != null) {
-				Occurence[] wordsOnLine = processLine(line, lineNumber);
-				for (Occurence word : wordsOnLine) {
-					theTrie.addWord(word.getWord(), lineNumber, word.getStartingColumn());
+				if (line.length() > 0) {
+					Occurence[] wordsOnLine = processLine(line, lineNumber);
+					if (wordsOnLine != null && wordsOnLine.length > 0) {
+						for (Occurence word : wordsOnLine) {
+							if (word != null) {
+								theTrie.addWord(word.getWord(), lineNumber, word.getStartingColumn());
+							}
+						}
+					}
 				}
+				
 				lineNumber++;
 			}
 			reader.close();
@@ -111,18 +119,66 @@ public class AutoTester implements Search {
 			e.printStackTrace();
 		}
 	}
-	public static Occurence[] processLine(String line, int lineNumber) {
+	boolean goodToCheckLine(String line) {
+		if (line.length() < 1) {
+			return false;
+		}
+//		for (char character : line.trim().toCharArray()) {
+//			if (!Character.isLetter(character)) {
+//				return false;
+//			}
+//		}
+		return true;
+	}
+	
+	boolean goodToAddWord(String word) {
+		if (word.length() < 1) {
+			return false;
+		} 
+		for (char character : word.toCharArray()) {
+			if (!Character.isLetter(character)) {
+				return false;
+			}
+		}
+		if (stopWords.length > 0 || stopWords != null) {
+			for (String stopWord : stopWords) {
+				if (word == stopWord) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	Occurence[] processLine(String line, int lineNumber) {
 		String[] words = line.trim().split(" ");
 		Occurence[] result = new Occurence[words.length];
 		int startingColumn = 1;
 		for (int j = 0; j < words.length; j++) {
 			String word = words[j];
 			//TODO Right here we need to check the work only contains alpha numeric characters and is not in Stop Words.
-			Occurence occurence = new Occurence(word, lineNumber, startingColumn);
+			if (goodToAddWord(word)) {
+				Occurence occurence = new Occurence(word, lineNumber, startingColumn);
+				
+				result[j] = occurence;
+			}
 			startingColumn += word.length() + 1;
-			result[j] = occurence;
+			
 		}
 		return result;
 	}
 
+	@Override
+	public int wordCount(String word) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		int result;
+		if (theTrie.search(word) == null) {
+			result = 0;
+		}
+		else {
+			result = theTrie.search(word).size;
+		}
+		
+		return result;
+	}
 }
