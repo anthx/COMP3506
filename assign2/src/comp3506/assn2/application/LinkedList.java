@@ -5,7 +5,7 @@ import java.util.Iterator;
 public class LinkedList<T> implements Iterator<Object> {
 	private ListNode<T> head;
 	private ListNode<T> tail;
-	private int size;
+	int size;
 	private ListNode<T> current;
 	
 	public void append(T element) {
