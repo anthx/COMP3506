@@ -6,12 +6,14 @@ public class TrieNode {
 	TrieNode[] children = new TrieNode[26];
 	LinkedList<Pair> occurences;
 	String value;
+	private char character;
 	
 	boolean isEnd;
 	
 	
-	public TrieNode() {
+	public TrieNode(char c) {
 		isEnd = false;
+		character = c;
 	}
 	
 	void addChild() {

@@ -4,13 +4,13 @@ import comp3506.assn2.utils.Pair;
 
 public class Trie {
 
-	TrieNode root = new TrieNode();
+	TrieNode root = new TrieNode('a');
 
 	public Trie() {
 
 	}
 
-	public void addWord(String word, int lineNumber, int character) {
+	public void addWord(String word, int lineNumber, int characterPosition) {
 		TrieNode checkOutNode = root;
 		for (int i = 0; i < word.length(); i++) {
 			int index = word.toLowerCase().charAt(i) - 'a';
@@ -21,11 +21,12 @@ public class Trie {
 				checkOutNode = checkOutNode.children[index];
 			}
 			else {
-				checkOutNode.children[index] = new TrieNode();
+				checkOutNode.children[index] = new TrieNode(word.toLowerCase().charAt(i));
+				checkOutNode = checkOutNode.children[index];
 			}
 		}
-		checkOutNode.isEnd = true;
-		Pair<Integer, Integer> occurence = new Pair<Integer, Integer>(lineNumber, character);
+//		checkOutNode.isEnd = true;
+		Pair<Integer, Integer> occurence = new Pair<Integer, Integer>(lineNumber, characterPosition);
 		checkOutNode.isEnd();
 		checkOutNode.occurences.append(occurence);
 	}

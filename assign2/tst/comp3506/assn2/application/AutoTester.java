@@ -176,6 +176,7 @@ public class AutoTester implements Search {
 			result = 0;
 		}
 		else {
+			LinkedList<Pair> resultNode = theTrie.search(word);
 			result = theTrie.search(word).size;
 		}
 		
