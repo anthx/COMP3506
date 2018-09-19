@@ -2,25 +2,32 @@ package comp3506.assn2.application;
 
 import java.util.Iterator;
 
+import comp3506.assn2.utils.Pair;
+
 public class LinkedList<T> implements Iterator<Object> {
 	private ListNode<T> head;
 	private ListNode<T> tail;
 	int size;
 	private ListNode<T> current;
 	
+	public LinkedList() {
+		size = 0;
+	}
+	
 	public void append(T element) {
 		ListNode<T> aNode = new ListNode<>(element);
-		add(aNode);
-	}
-
-	public void add(ListNode<T> aNode) {
-		aNode.previous = this.tail;
-		this.tail = aNode;
-		if (this.head == null) {
-			this.head = aNode;
-			current = this.head;
+		aNode.previous = tail;
+		
+		if (head == null) {
+			head = aNode;
+			current = head;
 		}
-		this.size++;
+		else {
+			tail.next = aNode;
+		}
+		tail = aNode;
+		
+		size++;
 	}
 
 	public ListNode<T> getHead() {

@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import comp3506.assn2.utils.Occurence;
 import comp3506.assn2.utils.Pair;
+import comp3506.assn2.utils.Misc;
 
 /**
  * @author anthony
@@ -40,9 +41,10 @@ public class FirstTests {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void testLoad() throws FileNotFoundException, IllegalArgumentException {
 		AutoTester at = new AutoTester("files/shakespeare.txt", "files/shakespeare-index.txt", "files/stop-words.txt");
+		System.out.println("1");
 	}
 	
 	//@Test
@@ -51,4 +53,60 @@ public class FirstTests {
 //			System.out.println(iterable_element);
 //		}
 //	}
+	
+	@Test
+	public void testTrimWord() {
+		String word = ".word,";
+		String actual = comp3506.assn2.utils.Misc.trimNonLetters(word);
+		assertEquals("word", actual);
+	}
+	
+	@Test
+	public void testTrimWord3() {
+		String word = " .word, ";
+		String actual = comp3506.assn2.utils.Misc.trimNonLetters(word);
+		assertEquals("word", actual);
+	}
+	
+	@Test
+	public void testTrimWord4() {
+		String word = " .word, ";
+		String actual = comp3506.assn2.utils.Misc.trimNonLetters(word);
+		assertEquals("word", actual);
+	}
+	
+	@Test
+	public void testTrimWord2() {
+		String word = " increases,";
+		String actual = comp3506.assn2.utils.Misc.trimNonLetters(word);
+		assertEquals("increases", actual);
+	}
+
+	@Test
+	public void testTrimWord5() {
+		String word = " increase, ";
+		String actual = comp3506.assn2.utils.Misc.trimNonLetters(word);
+		assertEquals("increase", actual);
+	}
+	
+	@Test
+	public void testTrimWordA() {
+		String word = "a";
+		String actual = comp3506.assn2.utils.Misc.trimNonLetters(word);
+		assertEquals("a", actual);
+	}
+	
+	@Test
+	public void testTrimWordZ() {
+		String word = "z";
+		String actual = comp3506.assn2.utils.Misc.trimNonLetters(word);
+		assertEquals("z", actual);
+	}
+	
+	@Test
+	public void testTrimWordUppercase() {
+		String word = "Word";
+		String actual = comp3506.assn2.utils.Misc.trimNonLetters(word);
+		assertEquals("word", actual);
+	}
 }

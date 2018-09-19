@@ -4,10 +4,13 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import comp3506.assn2.utils.Occurence;
 import comp3506.assn2.utils.Pair;
 import comp3506.assn2.utils.Triple;
+import comp3506.assn2.utils.Misc;
 
 /**
  * Hook class used by automated testing tool. The testing tool will instantiate
@@ -132,6 +135,7 @@ public class AutoTester implements Search {
 	}
 	
 	boolean goodToAddWord(String word) {
+		word = comp3506.assn2.utils.Misc.trimNonLetters(word);
 		if (word.length() < 1) {
 			return false;
 		} 
@@ -140,13 +144,13 @@ public class AutoTester implements Search {
 				return false;
 			}
 		}
-		if (stopWords.length > 0 || stopWords != null) {
-			for (String stopWord : stopWords) {
-				if (word == stopWord) {
-					return false;
-				}
-			}
-		}
+//		if (stopWords.length > 0 || stopWords != null) {
+//			for (String stopWord : stopWords) {
+//				if (word == stopWord) {
+//					return false;
+//				}
+//			}
+//		}
 		return true;
 	}
 	
@@ -158,8 +162,15 @@ public class AutoTester implements Search {
 			String word = words[j];
 			//TODO Right here we need to check the work only contains alpha numeric characters and is not in Stop Words.
 			if (goodToAddWord(word)) {
-				Occurence occurence = new Occurence(word, lineNumber, startingColumn);
 				
+				word = comp3506.assn2.utils.Misc.trimNonLetters(word);
+//				if (true) {
+//					System.out.println(word);
+//				}
+				Occurence occurence = new Occurence(word, lineNumber, startingColumn);
+//				if (word)) {
+//					System.out.println(word);
+//				}
 				result[j] = occurence;
 			}
 			startingColumn += word.length() + 1;
@@ -180,6 +191,13 @@ public class AutoTester implements Search {
 			result = theTrie.search(word).size;
 		}
 		
+		return result;
+	}
+	
+	@Override
+	public List<Pair<Integer, Integer>> phraseOccurrence(String phrase) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		List<Pair<Integer, Integer>> result = new ArrayList<Pair<Integer, Integer>>();
 		return result;
 	}
 }

@@ -22,7 +22,7 @@ public class TrieNode {
 	
 	public void isEnd() {
 		isEnd = true;
-		occurences = new LinkedList<Pair>();
+//		occurences = new LinkedList<Pair>();
 	}
 	
 }

@@ -3,16 +3,18 @@ package comp3506.assn2.application;
 import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
+import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 
-public class Searches {
+import comp3506.assn2.utils.Pair;
+
+public class PhraseOccurenceTests {
 
 	@Test
-	public void testWordCount() throws FileNotFoundException, IllegalArgumentException {
+	public void testPhraseOccurrenceThine() throws FileNotFoundException, IllegalArgumentException {
 		AutoTester at = new AutoTester("files/shakespeare.txt", "files/shakespeare-index.txt", "files/stop-words.txt");
-		assertEquals("Not right word count", 154, at.wordCount("thine"));
+		List<Pair<Integer, Integer>> actual = at.phraseOccurrence("thine");
 		
 	}
 

@@ -14,9 +14,7 @@ public class Trie {
 		TrieNode checkOutNode = root;
 		for (int i = 0; i < word.length(); i++) {
 			int index = word.toLowerCase().charAt(i) - 'a';
-			if (index > 26 || index < 0) {
-				System.out.println("4");
-			}
+//			System.out.println(word);
 			if (checkOutNode.children[index] != null) {
 				checkOutNode = checkOutNode.children[index];
 			}
@@ -25,23 +23,22 @@ public class Trie {
 				checkOutNode = checkOutNode.children[index];
 			}
 		}
-//		checkOutNode.isEnd = true;
+
 		Pair<Integer, Integer> occurence = new Pair<Integer, Integer>(lineNumber, characterPosition);
 		checkOutNode.isEnd();
-		checkOutNode.occurences.append(occurence);
-	}
 
-	private TrieNode traverse(TrieNode node, char c) {
-		TrieNode thisNode;
-		TrieNode result = null;
-		return result;
+		if (checkOutNode.occurences == null) {
+			checkOutNode.occurences = new LinkedList<>();
+		}
+		checkOutNode.occurences.append(occurence);
 	}
 
 	public LinkedList<Pair> search(String word) {
 		LinkedList<Pair> result = null;
+		word = comp3506.assn2.utils.Misc.trimNonLetters(word);
 		TrieNode checkOutNode = root;
 		for (int i = 0; i < word.length(); i++) {
-			int index = word.charAt(i) - 'a';
+			int index = word.toLowerCase().charAt(i) - 'a';
 			if (checkOutNode.children[index] != null) {
 				checkOutNode = checkOutNode.children[index];
 			} else {
