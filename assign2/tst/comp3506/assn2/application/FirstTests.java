@@ -70,7 +70,7 @@ public class FirstTests {
 	
 	@Test
 	public void testTrimWord4() {
-		String word = " .word, ";
+		String word = " .word; ";
 		String actual = comp3506.assn2.utils.Misc.trimNonLetters(word);
 		assertEquals("word", actual);
 	}

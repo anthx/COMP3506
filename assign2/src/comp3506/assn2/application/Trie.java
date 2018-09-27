@@ -52,3 +52,7 @@ public class Trie {
 		return result;
 	}
 }
+
+//Reference
+
+//V. Rao Sanaka, "Trie | (Insert and Search)", Geeks For Geeks. [Online]. Available: https://www.geeksforgeeks.org/trie-insert-and-search/. [Accessed: 15- Sep- 2018].

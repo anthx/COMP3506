@@ -40,8 +40,8 @@ public class LinkedList<T> implements Iterator<Object> {
 	}
 
 	@Override
-	public Object next() {
-		Object next = current.next;
+	public ListNode<T> next() {
+		ListNode<T> next = current.next;
 		current = current.next;
 		return next;
 	}

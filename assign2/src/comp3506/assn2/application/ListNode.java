@@ -8,4 +8,8 @@ class ListNode<T> {
 	public ListNode(T element) {
 		this.element = element;
 	}
+	
+	public T getElement() {
+		return element;
+	}
 }

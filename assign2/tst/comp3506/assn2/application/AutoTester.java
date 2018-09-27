@@ -27,6 +27,7 @@ public class AutoTester implements Search {
 	String[] stopWords = new String[500];
 	Pair[] sectionIndex = new Pair[100];
 	Trie theTrie;
+	LinkedList listOfLines = new LinkedList();
 
 	/**
 	 * Create an object that performs search operations on a document. If
@@ -104,6 +105,7 @@ public class AutoTester implements Search {
 			theTrie = new Trie();
 			while ((line = bufferedReader.readLine()) != null) {
 				if (line.length() > 0) {
+					listOfLines.append(line);
 					Occurence[] wordsOnLine = processLine(line, lineNumber);
 					if (wordsOnLine != null && wordsOnLine.length > 0) {
 						for (Occurence word : wordsOnLine) {
@@ -113,7 +115,7 @@ public class AutoTester implements Search {
 						}
 					}
 				}
-				
+
 				lineNumber++;
 			}
 			reader.close();
@@ -122,59 +124,61 @@ public class AutoTester implements Search {
 			e.printStackTrace();
 		}
 	}
+
 	boolean goodToCheckLine(String line) {
 		if (line.length() < 1) {
 			return false;
 		}
-//		for (char character : line.trim().toCharArray()) {
-//			if (!Character.isLetter(character)) {
-//				return false;
-//			}
-//		}
+		// for (char character : line.trim().toCharArray()) {
+		// if (!Character.isLetter(character)) {
+		// return false;
+		// }
+		// }
 		return true;
 	}
-	
+
 	boolean goodToAddWord(String word) {
 		word = comp3506.assn2.utils.Misc.trimNonLetters(word);
 		if (word.length() < 1) {
 			return false;
-		} 
+		}
 		for (char character : word.toCharArray()) {
 			if (!Character.isLetter(character)) {
 				return false;
 			}
 		}
-//		if (stopWords.length > 0 || stopWords != null) {
-//			for (String stopWord : stopWords) {
-//				if (word == stopWord) {
-//					return false;
-//				}
-//			}
-//		}
+		// if (stopWords.length > 0 || stopWords != null) {
+		// for (String stopWord : stopWords) {
+		// if (word == stopWord) {
+		// return false;
+		// }
+		// }
+		// }
 		return true;
 	}
-	
+
 	Occurence[] processLine(String line, int lineNumber) {
 		String[] words = line.trim().split(" ");
 		Occurence[] result = new Occurence[words.length];
 		int startingColumn = 1;
 		for (int j = 0; j < words.length; j++) {
 			String word = words[j];
-			//TODO Right here we need to check the work only contains alpha numeric characters and is not in Stop Words.
+			// TODO Right here we need to check the work only contains alpha
+			// numeric characters and is not in Stop Words.
 			if (goodToAddWord(word)) {
-				
-				word = comp3506.assn2.utils.Misc.trimNonLetters(word);
-//				if (true) {
-//					System.out.println(word);
-//				}
-				Occurence occurence = new Occurence(word, lineNumber, startingColumn);
-//				if (word)) {
-//					System.out.println(word);
-//				}
+
+				String TrimmedWword = comp3506.assn2.utils.Misc.trimNonLetters(word);
+				// if (true) {
+				// System.out.println(word);
+				// }
+				Occurence occurence = new Occurence(TrimmedWword, lineNumber, startingColumn);
+				// if (word)) {
+				// System.out.println(word);
+				// }
 				result[j] = occurence;
 			}
 			startingColumn += word.length() + 1;
-			
+
 		}
 		return result;
 	}
@@ -185,19 +189,85 @@ public class AutoTester implements Search {
 		int result;
 		if (theTrie.search(word) == null) {
 			result = 0;
-		}
-		else {
+		} else {
 			LinkedList<Pair> resultNode = theTrie.search(word);
 			result = theTrie.search(word).size;
 		}
-		
+
 		return result;
 	}
-	
+
 	@Override
 	public List<Pair<Integer, Integer>> phraseOccurrence(String phrase) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		List<Pair<Integer, Integer>> result = new ArrayList<Pair<Integer, Integer>>();
+
+		String[] words = phrase.trim().split(" ");
+		LinkedList[] wordsResults = new LinkedList[words.length];
+		int occurencesOfLeastFrequentWordIndex = 0;
+		int occurencesOfLeastFrequentWord = 0;
+		for (int j = 0; j < words.length; j++) {
+			String word = words[j];
+			if (goodToAddWord(word)) {
+				word = comp3506.assn2.utils.Misc.trimNonLetters(word);
+				wordsResults[j] = theTrie.search(word);
+				if (wordsResults[j] == null) {
+					return new ArrayList<Pair<Integer, Integer>>();
+				}
+			}
+			// find which word has least occurrences
+			if (j == 0) {
+				occurencesOfLeastFrequentWord = wordsResults[j].size;
+
+			} else {
+				if (wordsResults[j].size < occurencesOfLeastFrequentWordIndex) {
+					occurencesOfLeastFrequentWord = wordsResults[j].size;
+					occurencesOfLeastFrequentWordIndex = j;
+				}
+			}
+		}
+
+		// loop over all lines
+		int lineNumber = 1;
+		while (listOfLines.hasNext()) {
+			String thisLine = (String) listOfLines.next().getElement();
+			
+			if (thisLine.contains(words[occurencesOfLeastFrequentWordIndex])) {
+				System.out.println(thisLine);
+				// each line, check the phrase exists
+				Occurence[] wordsOnLine = processLine(thisLine, lineNumber);
+				
+				//For each instance of the first word in the phrase, on the line:
+				for (int wolIndex = 0; wolIndex < wordsOnLine.length; wolIndex++) {
+					System.out.println(wolIndex);
+					Occurence word = wordsOnLine[wolIndex];
+					System.out.println(words[0]);
+					System.out.println(word.getWord());
+					if (word.getWord() == words[0]) {
+						for (int j = 1; j < words.length; j++) {
+							if (wordsOnLine[wolIndex+1].getWord() != words[j+1]) {
+								break;
+							}
+						}
+						//checked the whole phrase, matches
+						Pair<Integer, Integer> thisResult = new Pair<Integer, Integer>(lineNumber, word.getStartingColumn());
+						result.add(thisResult);
+					}
+				}
+//				for (int j = 0; j < words.length; j++) {
+//					String wordPhrase = wordsOnLine[j].getWord();
+//					// TODO Right here we need to check the work only contains
+//					// alpha numeric characters
+//					wordPhrase = comp3506.assn2.utils.Misc.trimNonLetters(wordPhrase);
+//					if (j == 0) {
+//						phrasestartingColumn += wordPhrase.length() + 1;
+//					}
+//					
+//
+//				}
+			}
+			lineNumber++;
+		}
 		return result;
 	}
 }
