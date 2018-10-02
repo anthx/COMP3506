@@ -29,4 +29,50 @@ public class Misc {
 		}
 		return word;
 	}
+	
+	public static Occurence[] processLine(String line, int lineNumber) {
+		String[] words = line.trim().split(" ");
+		Occurence[] result = new Occurence[words.length];
+		int startingColumn = 1;
+		for (int j = 0; j < words.length; j++) {
+			String word = words[j];
+			// TODO Right here we need to check the work only contains alpha
+			// numeric characters and is not in Stop Words.
+			if (goodToAddWord(word)) {
+
+				String TrimmedWword = comp3506.assn2.utils.Misc.trimNonLetters(word);
+				// if (true) {
+				// System.out.println(word);
+				// }
+				Occurence occurence = new Occurence(TrimmedWword, lineNumber, startingColumn);
+				// if (word)) {
+				// System.out.println(word);
+				// }
+				result[j] = occurence;
+			}
+			startingColumn += word.length() + 1;
+
+		}
+		return result;
+	}
+	
+	static boolean goodToAddWord(String word) {
+		word = comp3506.assn2.utils.Misc.trimNonLetters(word);
+		if (word.length() < 1) {
+			return false;
+		}
+		for (char character : word.toCharArray()) {
+			if (!Character.isLetter(character)) {
+				return false;
+			}
+		}
+		// if (stopWords.length > 0 || stopWords != null) {
+		// for (String stopWord : stopWords) {
+		// if (word == stopWord) {
+		// return false;
+		// }
+		// }
+		// }
+		return true;
+	}
 }
