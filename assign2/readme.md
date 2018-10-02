@@ -23,3 +23,7 @@ Readme.md
 LinkedList and ListNode
 
 Thomas, R. (2018). Algorithms and Data Structures.
+
+Trie Implementation
+
+V. Rao Sanaka, "Trie | (Insert and Search)", Geeks For Geeks. [Online]. Available: https://www.geeksforgeeks.org/trie-insert-and-search/. [Accessed: 15- Sep- 2018].
