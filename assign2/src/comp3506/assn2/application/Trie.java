@@ -20,6 +20,7 @@ public class Trie {
 			}
 			else {
 				checkOutNode.children[index] = new TrieNode(word.toLowerCase().charAt(i));
+				checkOutNode.hasChildren = true;
 				checkOutNode = checkOutNode.children[index];
 			}
 		}
@@ -30,11 +31,11 @@ public class Trie {
 		if (checkOutNode.occurences == null) {
 			checkOutNode.occurences = new LinkedList<>();
 		}
-		checkOutNode.occurences.append(occurence);
+		checkOutNode.occurences.add(occurence);
 	}
 
-	public LinkedList<Pair> search(String word) {
-		LinkedList<Pair> result = null;
+	TrieNode findNode(String word) {
+		TrieNode result;
 		word = comp3506.assn2.utils.Misc.trimNonLetters(word);
 		TrieNode checkOutNode = root;
 		for (int i = 0; i < word.length(); i++) {
@@ -46,9 +47,40 @@ public class Trie {
 				return null;
 			}
 		}
-		if (checkOutNode.isEnd) {
-			result = checkOutNode.occurences;
+		result = checkOutNode;
+		return result;
+	}
+	
+	TrieNode traverseChildren(TrieNode node, LinkedList<Pair<Integer, Integer>> resultSet) {
+		if (!node.hasChildren) {
+			System.out.println("before append");
+			resultSet.append(node.occurences);
+			System.out.println("after append");
 		}
+		else {
+			for (TrieNode child : node.children) {
+				if (child != null) {
+					System.out.println(child.character);
+					traverseChildren(child, resultSet);
+				}
+			}
+			
+		}
+		return null;
+	}
+	
+	public LinkedList<Pair<Integer, Integer>> findPrefixes(String word) {
+		LinkedList<Pair<Integer, Integer>> result = new LinkedList<>();
+		TrieNode prefix = findNode(word);
+		traverseChildren(prefix, result);
+		return result;
+	}
+	
+	public LinkedList<Pair<Integer, Integer>> search(String word) {
+		LinkedList<Pair<Integer, Integer>> result = null;
+		word = comp3506.assn2.utils.Misc.trimNonLetters(word);
+		TrieNode checkOutNode = findNode(word);
+		result = checkOutNode.occurences;
 		return result;
 	}
 }

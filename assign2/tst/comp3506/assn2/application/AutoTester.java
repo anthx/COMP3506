@@ -27,7 +27,7 @@ public class AutoTester implements Search {
 	String[] stopWords = new String[500];
 	Pair[] sectionIndex = new Pair[100];
 	Trie theTrie;
-	LinkedList listOfLines = new LinkedList();
+	LinkedList<String> listOfLines = new LinkedList<String>();
 
 	/**
 	 * Create an object that performs search operations on a document. If
@@ -105,7 +105,7 @@ public class AutoTester implements Search {
 			theTrie = new Trie();
 			while ((line = bufferedReader.readLine()) != null) {
 				if (line.length() > 0) {
-					listOfLines.append(line);
+					listOfLines.add(line);
 					Occurence[] wordsOnLine = processLine(line, lineNumber);
 					if (wordsOnLine != null && wordsOnLine.length > 0) {
 						for (Occurence word : wordsOnLine) {
@@ -185,89 +185,31 @@ public class AutoTester implements Search {
 
 	@Override
 	public int wordCount(String word) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		
 		int result;
 		if (theTrie.search(word) == null) {
 			result = 0;
 		} else {
-			LinkedList<Pair> resultNode = theTrie.search(word);
 			result = theTrie.search(word).size;
 		}
 
 		return result;
 	}
-
+	
 	@Override
-	public List<Pair<Integer, Integer>> phraseOccurrence(String phrase) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		List<Pair<Integer, Integer>> result = new ArrayList<Pair<Integer, Integer>>();
-
-		String[] words = phrase.trim().split(" ");
-		LinkedList[] wordsResults = new LinkedList[words.length];
-		int occurencesOfLeastFrequentWordIndex = 0;
-		int occurencesOfLeastFrequentWord = 0;
-		for (int j = 0; j < words.length; j++) {
-			String word = words[j];
-			if (goodToAddWord(word)) {
-				word = comp3506.assn2.utils.Misc.trimNonLetters(word);
-				wordsResults[j] = theTrie.search(word);
-				if (wordsResults[j] == null) {
-					return new ArrayList<Pair<Integer, Integer>>();
-				}
-			}
-			// find which word has least occurrences
-			if (j == 0) {
-				occurencesOfLeastFrequentWord = wordsResults[j].size;
-
-			} else {
-				if (wordsResults[j].size < occurencesOfLeastFrequentWordIndex) {
-					occurencesOfLeastFrequentWord = wordsResults[j].size;
-					occurencesOfLeastFrequentWordIndex = j;
-				}
-			}
+	public List<Pair<Integer, Integer>> prefixOccurrence(String prefix ) throws IllegalArgumentException {
+		LinkedList<Pair<Integer, Integer>> result = theTrie.findPrefixes(prefix);
+		List<Pair<Integer, Integer>> resultList = new ArrayList<>();
+		while (result.hasNext()) {
+			Pair<Integer, Integer> toAdd = result.next().getElement();
+			resultList.add(toAdd);
 		}
-
-		// loop over all lines
-		int lineNumber = 1;
-		while (listOfLines.hasNext()) {
-			String thisLine = (String) listOfLines.next().getElement();
-			
-			if (thisLine.contains(words[occurencesOfLeastFrequentWordIndex])) {
-				System.out.println(thisLine);
-				// each line, check the phrase exists
-				Occurence[] wordsOnLine = processLine(thisLine, lineNumber);
-				
-				//For each instance of the first word in the phrase, on the line:
-				for (int wolIndex = 0; wolIndex < wordsOnLine.length; wolIndex++) {
-					System.out.println(wolIndex);
-					Occurence word = wordsOnLine[wolIndex];
-					System.out.println(words[0]);
-					System.out.println(word.getWord());
-					if (word.getWord() == words[0]) {
-						for (int j = 1; j < words.length; j++) {
-							if (wordsOnLine[wolIndex+1].getWord() != words[j+1]) {
-								break;
-							}
-						}
-						//checked the whole phrase, matches
-						Pair<Integer, Integer> thisResult = new Pair<Integer, Integer>(lineNumber, word.getStartingColumn());
-						result.add(thisResult);
-					}
-				}
-//				for (int j = 0; j < words.length; j++) {
-//					String wordPhrase = wordsOnLine[j].getWord();
-//					// TODO Right here we need to check the work only contains
-//					// alpha numeric characters
-//					wordPhrase = comp3506.assn2.utils.Misc.trimNonLetters(wordPhrase);
-//					if (j == 0) {
-//						phrasestartingColumn += wordPhrase.length() + 1;
-//					}
-//					
-//
-//				}
-			}
-			lineNumber++;
-		}
-		return result;
+		return resultList;
 	}
+
+//	@Override
+//	public List<Pair<Integer, Integer>> phraseOccurrence(String phrase) throws IllegalArgumentException {
+//		// TODO Auto-generated method stub
+//		
+//	}
 }
