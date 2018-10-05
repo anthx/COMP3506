@@ -4,8 +4,8 @@ public class Misc {
 
 	public static String trimNonLetters(String word) {
 		word = word + " ";
-		word = word.trim().toLowerCase();
-//		System.out.println(word);
+		word = word.trim().toLowerCase().replaceAll(regex, replacement);
+		// System.out.println(word);
 		if (word.length() > 0) {
 			try {
 				int index = word.charAt(0) - 'a';
@@ -29,33 +29,28 @@ public class Misc {
 		}
 		return word;
 	}
-	
+
 	public static Occurence[] processLine(String line, int lineNumber) {
-		String[] words = line.trim().split(" ");
+		String[] words = line.trim().split("[ ,]");
 		Occurence[] result = new Occurence[words.length];
-		int startingColumn = 1;
+		int startingColumn = 0;
 		for (int j = 0; j < words.length; j++) {
 			String word = words[j];
-			// TODO Right here we need to check the work only contains alpha
-			// numeric characters and is not in Stop Words.
-			if (goodToAddWord(word)) {
 
-				String TrimmedWword = comp3506.assn2.utils.Misc.trimNonLetters(word);
-				// if (true) {
-				// System.out.println(word);
-				// }
-				Occurence occurence = new Occurence(TrimmedWword, lineNumber, startingColumn);
-				// if (word)) {
-				// System.out.println(word);
-				// }
-				result[j] = occurence;
-			}
-			startingColumn += word.length() + 1;
+			String TrimmedWword = comp3506.assn2.utils.Misc.trimNonLetters(word);
+			startingColumn = line.toLowerCase().indexOf(TrimmedWword, startingColumn);
+			Occurence occurence = new Occurence(TrimmedWword, lineNumber, startingColumn + 1);
+			// if (word)) {
+			// System.out.println(word);
+			// }
+			result[j] = occurence;
+
+//			startingColumn += word.length() + 1;
 
 		}
 		return result;
 	}
-	
+
 	static boolean goodToAddWord(String word) {
 		word = comp3506.assn2.utils.Misc.trimNonLetters(word);
 		if (word.length() < 1) {
