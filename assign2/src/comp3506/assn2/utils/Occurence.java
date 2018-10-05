@@ -12,6 +12,7 @@ public class Occurence {
 	public Occurence(String word, int lineNumber, int startingColumn) {
 		this.word = word;
 		this.startingColumn = startingColumn;
+		this.lineNumber = lineNumber;
 	}
 	
 	public String getWord() {
