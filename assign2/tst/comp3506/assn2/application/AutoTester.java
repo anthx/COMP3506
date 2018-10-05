@@ -106,10 +106,11 @@ public class AutoTester implements Search {
 			while ((line = bufferedReader.readLine()) != null) {
 				if (line.length() > 0) {
 					listOfLines.add(line);
-					Occurence[] wordsOnLine = processLine(line, lineNumber);
+					Occurence[] wordsOnLine = Misc.processLine(line, lineNumber);
 					if (wordsOnLine != null && wordsOnLine.length > 0) {
 						for (Occurence word : wordsOnLine) {
 							if (word != null) {
+								System.out.println(line);
 								theTrie.addWord(word.getWord(), lineNumber, word.getStartingColumn());
 							}
 						}
@@ -155,32 +156,6 @@ public class AutoTester implements Search {
 		// }
 		// }
 		return true;
-	}
-
-	Occurence[] processLine(String line, int lineNumber) {
-		String[] words = line.trim().split(" ");
-		Occurence[] result = new Occurence[words.length];
-		int startingColumn = 1;
-		for (int j = 0; j < words.length; j++) {
-			String word = words[j];
-			// TODO Right here we need to check the work only contains alpha
-			// numeric characters and is not in Stop Words.
-			if (goodToAddWord(word)) {
-
-				String TrimmedWword = comp3506.assn2.utils.Misc.trimNonLetters(word);
-				// if (true) {
-				// System.out.println(word);
-				// }
-				Occurence occurence = new Occurence(TrimmedWword, lineNumber, startingColumn);
-				// if (word)) {
-				// System.out.println(word);
-				// }
-				result[j] = occurence;
-			}
-			startingColumn += word.length() + 1;
-
-		}
-		return result;
 	}
 
 	@Override
