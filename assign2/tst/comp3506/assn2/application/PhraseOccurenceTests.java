@@ -12,7 +12,7 @@ import comp3506.assn2.utils.Pair;
 
 public class PhraseOccurenceTests {
 
-	@Test
+//	@Test
 	public void testPhraseOccurrenceAbundance() throws FileNotFoundException, IllegalArgumentException {
 		AutoTester at = new AutoTester("files/shakespeare.txt", "files/shakespeare-index.txt", "files/stop-words.txt");
 		List<Pair<Integer, Integer>> actual = at.phraseOccurrence("abundance");
@@ -52,7 +52,7 @@ public class PhraseOccurenceTests {
 		assertEquals(expected, actual);
 	}
 
-	@Test
+//	@Test
 	public void testPhraseOccurrenceTheQuestion() throws FileNotFoundException, IllegalArgumentException {
 		AutoTester at = new AutoTester("files/test.txt", "files/shakespeare-index.txt", "files/stop-words.txt");
 		List<Pair<Integer, Integer>> actual = at.phraseOccurrence("to be or not to be");
@@ -67,7 +67,7 @@ public class PhraseOccurenceTests {
 		assertEquals(expected, actual);
 	}
 	
-	@Test
+//	@Test
 	public void testPhraseOccurrenceNotTheQuestion() throws FileNotFoundException, IllegalArgumentException {
 		AutoTester at = new AutoTester("files/test.txt", "files/shakespeare-index.txt", "files/stop-words.txt");
 		List<Pair<Integer, Integer>> actual = at.phraseOccurrence("this question is not found");
@@ -80,7 +80,7 @@ public class PhraseOccurenceTests {
 		assertEquals(expected, actual);
 	}
 	
-	@Test
+//	@Test
 	public void testPhraseOccurrenceOneWord() throws FileNotFoundException, IllegalArgumentException {
 		AutoTester at = new AutoTester("files/test.txt", "files/shakespeare-index.txt", "files/stop-words.txt");
 		List<Pair<Integer, Integer>> actual = at.phraseOccurrence("there");

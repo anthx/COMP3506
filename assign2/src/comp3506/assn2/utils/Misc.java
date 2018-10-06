@@ -4,7 +4,8 @@ public class Misc {
 
 	public static String trimNonLetters(String word) {
 		word = word + " ";
-		word = word.trim().toLowerCase().replaceAll(regex, replacement);
+		// TODO maybe find a better way of fixing words without losing data.
+		word = word.trim().toLowerCase().replaceAll("[^a-z]", "");
 		// System.out.println(word);
 		if (word.length() > 0) {
 			try {
@@ -14,7 +15,7 @@ public class Misc {
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
-				System.out.println(word + " ");
+//				System.out.println(word + " ");
 			}
 		}
 

@@ -30,8 +30,8 @@ public class ProcessLines {
 		assertEquals(romeExpected.startingColumn, actual[0].startingColumn);
 		assertEquals(romeExpected.word, actual[0].word);
 		
-		assertEquals(whereinExpected.word, actual[7].word);
-		assertEquals(whereinExpected.startingColumn, actual[7].startingColumn);
+		assertEquals(whereinExpected.word, actual[8].word);
+		assertEquals(whereinExpected.startingColumn, actual[8].startingColumn);
 		
 	}
 

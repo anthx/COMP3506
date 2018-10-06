@@ -34,13 +34,13 @@ public class WordCountTests {
 		assertEquals("Not right word count", 14, at.wordCount("abundance"));
 	}
 	
-//	@Test
+	@Test
 	public void testWordCountFinis() throws FileNotFoundException, IllegalArgumentException {
 		at = new AutoTester("files/shakespeare.txt", "files/shakespeare-index.txt", "files/stop-words.txt");
 		assertEquals("Not right word count", 2, at.wordCount("finis"));
 	}
 	
-	//@Test
+	@Test
 	public void testWordCountTest() throws FileNotFoundException, IllegalArgumentException {
 		AutoTester at = new AutoTester("files/test.txt", "files/shakespeare-index.txt", "files/stop-words.txt");
 		assertEquals("Not right word count", 2, at.wordCount("b"));

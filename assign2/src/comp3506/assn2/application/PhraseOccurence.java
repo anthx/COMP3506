@@ -50,7 +50,7 @@ public class PhraseOccurence {
 			String thisLine = (String) listOfLines.next().getElement();
 			
 			if (thisLine.contains(words[occurencesOfLeastFrequentWordIndex])) {
-				System.out.println(thisLine);
+//				System.out.println(thisLine);
 				// each line, check the phrase exists
 				Occurence[] wordsOnLine = Misc.processLine(thisLine, lineNumber);
 				

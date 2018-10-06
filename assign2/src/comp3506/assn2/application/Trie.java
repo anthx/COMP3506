@@ -12,6 +12,7 @@ public class Trie {
 
 	public void addWord(String word, int lineNumber, int characterPosition) {
 		TrieNode checkOutNode = root;
+		word = word.replace("'", "");
 		for (int i = 0; i < word.length(); i++) {
 			int index = word.toLowerCase().charAt(i) - 'a';
 //			System.out.println(word);
@@ -53,14 +54,14 @@ public class Trie {
 	
 	TrieNode traverseChildren(TrieNode node, LinkedList<Pair<Integer, Integer>> resultSet) {
 		if (!node.hasChildren) {
-			System.out.println("before append");
+//			System.out.println("before append");
 			resultSet.append(node.occurences);
-			System.out.println("after append");
+//			System.out.println("after append");
 		}
 		else {
 			for (TrieNode child : node.children) {
 				if (child != null) {
-					System.out.println(child.character);
+//					System.out.println(child.character);
 					traverseChildren(child, resultSet);
 				}
 			}

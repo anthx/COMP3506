@@ -110,7 +110,7 @@ public class AutoTester implements Search {
 					if (wordsOnLine != null && wordsOnLine.length > 0) {
 						for (Occurence word : wordsOnLine) {
 							if (word != null) {
-								System.out.println(line);
+//								System.out.println(line);
 								theTrie.addWord(word.getWord(), lineNumber, word.getStartingColumn());
 							}
 						}

@@ -77,7 +77,7 @@ public class FirstTests {
 	
 	@Test
 	public void testTrimWord2() {
-		String word = " increases,";
+		String word = " increases,'";
 		String actual = comp3506.assn2.utils.Misc.trimNonLetters(word);
 		assertEquals("increases", actual);
 	}
@@ -103,10 +103,10 @@ public class FirstTests {
 		assertEquals("z", actual);
 	}
 	
-	@Test
+//	@Test
 	public void testTrimWordUppercase() {
-		String word = "Word";
+		String word = "I'll";
 		String actual = comp3506.assn2.utils.Misc.trimNonLetters(word);
-		assertEquals("word", actual);
+		assertEquals("i'll", actual);
 	}
 }
