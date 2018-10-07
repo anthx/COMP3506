@@ -9,7 +9,6 @@ public class LinkedList<T> implements Iterator<Object> {
 	private ListNode<T> tail;
 	int size;
 	private ListNode<T> current;
-	private ListNode<T> next;
 	
 	public LinkedList() {
 		size = 0;
@@ -32,8 +31,19 @@ public class LinkedList<T> implements Iterator<Object> {
 	}
 	
 	public void append(LinkedList<T> list) {
+		if (tail != null) {
+			tail.next = list.head;
+		}
+		
  		tail = list.tail;
 		size += list.size;
+		if (head == null) {
+			head = list.head;
+		}
+		if (current == null) {
+			current = list.current;
+		}
+		
 	}
 
 	public ListNode<T> getHead() {
