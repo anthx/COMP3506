@@ -23,9 +23,9 @@ public class WordCountTests {
 	}
 	
 	@Test
-	public void testWordCountThine() throws FileNotFoundException, IllegalArgumentException {
+	public void testWordCountHerself() throws FileNotFoundException, IllegalArgumentException {
 		at = new AutoTester("files/shakespeare.txt", "files/shakespeare-index.txt", "files/stop-words.txt");
-		assertEquals("Not right word count", 503, at.wordCount("thine,"));
+		assertEquals("Not right word count", 113, at.wordCount("herself"));
 	}
 	
 	@Test

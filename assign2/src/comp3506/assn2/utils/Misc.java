@@ -32,21 +32,21 @@ public class Misc {
 	}
 
 	public static Occurence[] processLine(String line, int lineNumber) {
-		String[] words = line.trim().split("[ ,]");
+		String[] words = line.toLowerCase().split("[ -]");
 		Occurence[] result = new Occurence[words.length];
 		int startingColumn = 0;
+		int startingSearchColumn = 0;
 		for (int j = 0; j < words.length; j++) {
 			String word = words[j];
 
 			String TrimmedWword = comp3506.assn2.utils.Misc.trimNonLetters(word);
-			startingColumn = line.toLowerCase().indexOf(TrimmedWword, startingColumn);
+			startingColumn = line.toLowerCase().indexOf(TrimmedWword, startingSearchColumn);
+			
 			Occurence occurence = new Occurence(TrimmedWword, lineNumber, startingColumn + 1);
-			// if (word)) {
-			// System.out.println(word);
-			// }
-			result[j] = occurence;
+			
+			startingSearchColumn =+ word.length() + startingColumn;
 
-//			startingColumn += word.length() + 1;
+			result[j] = occurence;
 
 		}
 		return result;
@@ -62,13 +62,7 @@ public class Misc {
 				return false;
 			}
 		}
-		// if (stopWords.length > 0 || stopWords != null) {
-		// for (String stopWord : stopWords) {
-		// if (word == stopWord) {
-		// return false;
-		// }
-		// }
-		// }
+
 		return true;
 	}
 }

@@ -28,6 +28,6 @@ public class Occurence {
 	}
 	
 	public String toString() {
-		return word + ":" + startingColumn;
+		return word + ":" + lineNumber + ":" + startingColumn;
 	}
 }
