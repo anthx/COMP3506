@@ -73,6 +73,10 @@ public class Trie {
 	public LinkedList<Pair<Integer, Integer>> findPrefixes(String word) {
 		LinkedList<Pair<Integer, Integer>> result = new LinkedList<>();
 		TrieNode prefix = findNode(word);
+		if (prefix == null) {
+			return new LinkedList<>();
+		}
+		result.append(prefix.occurences);
 		traverseChildren(prefix, result);
 		return result;
 	}
