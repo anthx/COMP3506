@@ -4,7 +4,7 @@ import comp3506.assn2.utils.Pair;
 
 public class Trie {
 
-	TrieNode root = new TrieNode('a');
+	TrieNode root = new TrieNode();
 
 	public Trie() {
 

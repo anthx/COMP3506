@@ -18,13 +18,17 @@ public class TrieNode {
 		hasChildren = false;
 	}
 	
+	public TrieNode() {
+		hasChildren = false;
+		isEnd = false;
+	}
+
 	void addChild() {
 		
 	}
 	
 	public void isEnd() {
 		isEnd = true;
-//		occurences = new LinkedList<Pair>();
 	}
 	
 }
