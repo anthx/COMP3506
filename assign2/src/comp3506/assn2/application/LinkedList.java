@@ -2,8 +2,6 @@ package comp3506.assn2.application;
 
 import java.util.Iterator;
 
-import comp3506.assn2.utils.Pair;
-
 public class LinkedList<T> implements Iterator<Object> {
 	private ListNode<T> head;
 	private ListNode<T> tail;

@@ -9,13 +9,21 @@ public class Trie {
 	public Trie() {
 
 	}
-
+	/**
+	 * adds a new word to the Trie. If word is already in Trie, only add its position
+	 * Time Complexity: O(n) - where n is the letters in the word. Worst case where no prefix of that word has been added 
+	 * already. Because it loops over each letter in the word.
+	 * @param word the word to add
+	 * @param lineNumber the line number where it was found
+	 * @param characterPosition the column number where it was found
+	 * 
+	 */
 	public void addWord(String word, int lineNumber, int characterPosition) {
 		TrieNode checkOutNode = root;
 		word = word.replace("'", "");
 		for (int i = 0; i < word.length(); i++) {
 			int index = word.toLowerCase().charAt(i) - 'a';
-//			System.out.println(word);
+
 			if (checkOutNode.children[index] != null) {
 				checkOutNode = checkOutNode.children[index];
 			}
@@ -54,18 +62,14 @@ public class Trie {
 	
 	TrieNode traverseChildren(TrieNode node, LinkedList<Pair<Integer, Integer>> resultSet) {
 		if (!node.hasChildren) {
-//			System.out.println("before append");
 			resultSet.append(node.occurences);
-//			System.out.println("after append");
 		}
 		else {
 			for (TrieNode child : node.children) {
 				if (child != null) {
-//					System.out.println(child.character);
 					traverseChildren(child, resultSet);
 				}
 			}
-			
 		}
 		return null;
 	}
@@ -91,5 +95,5 @@ public class Trie {
 }
 
 //Reference
-
+// basic Trie structure and search and add from Geeks For Geeks. Modified for Java and to make more sense to me. 
 //V. Rao Sanaka, "Trie | (Insert and Search)", Geeks For Geeks. [Online]. Available: https://www.geeksforgeeks.org/trie-insert-and-search/. [Accessed: 15- Sep- 2018].

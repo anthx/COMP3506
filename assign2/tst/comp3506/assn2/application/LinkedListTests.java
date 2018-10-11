@@ -49,7 +49,6 @@ public class LinkedListTests {
 		Integer currentCount = 1;
 		while (ll.hasNext()) {
 			Object current = ll.next().getElement();
-			System.out.println(current);
 			assertEquals(currentCount, current);
 			currentCount++;
 		}
@@ -64,7 +63,6 @@ public class LinkedListTests {
 		Integer currentCount = 1;
 		while (ll.hasNext()) {
 			Object current = ll.next().getElement();
-			System.out.println(current);
 			assertEquals(currentCount, current);
 			currentCount++;
 		}
