@@ -126,38 +126,6 @@ public class AutoTester implements Search {
 		}
 	}
 
-	boolean goodToCheckLine(String line) {
-		if (line.length() < 1) {
-			return false;
-		}
-		// for (char character : line.trim().toCharArray()) {
-		// if (!Character.isLetter(character)) {
-		// return false;
-		// }
-		// }
-		return true;
-	}
-
-	boolean goodToAddWord(String word) {
-		word = comp3506.assn2.utils.Misc.trimNonLetters(word);
-		if (word.length() < 1) {
-			return false;
-		}
-		for (char character : word.toCharArray()) {
-			if (!Character.isLetter(character)) {
-				return false;
-			}
-		}
-		// if (stopWords.length > 0 || stopWords != null) {
-		// for (String stopWord : stopWords) {
-		// if (word == stopWord) {
-		// return false;
-		// }
-		// }
-		// }
-		return true;
-	}
-
 	@Override
 	public int wordCount(String word) throws IllegalArgumentException {
 		
