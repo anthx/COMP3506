@@ -10,16 +10,34 @@ import org.junit.Test;
 public class WordCountTests {
 	AutoTester at;
 
-//	@Test
+	@Test
 	public void testWordCountShakespeare() throws FileNotFoundException, IllegalArgumentException {
 		at = new AutoTester("files/shakespeare.txt", "files/shakespeare-index.txt", "files/stop-words.txt");
 		assertEquals("Not right word count", 3, at.wordCount("Shakespeare"));
 	}
 
-//	@Test
+	@Test
 	public void testWordCountThor() throws FileNotFoundException, IllegalArgumentException {
 		at = new AutoTester("files/shakespeare.txt", "files/shakespeare-index.txt", "files/stop-words.txt");
 		assertEquals("Not right word count", 0, at.wordCount("Thor"));
+	}
+	
+	@Test
+	public void testWordCountBible() throws FileNotFoundException, IllegalArgumentException {
+		at = new AutoTester("files/bible.txt", "files/shakespeare-index.txt", "files/stop-words.txt");
+		assertEquals("Not right word count", 4445, at.wordCount("God"));
+	}
+	
+	@Test
+	public void testWordCountBible2() throws FileNotFoundException, IllegalArgumentException {
+		at = new AutoTester("files/bible.txt", "files/shakespeare-index.txt", "files/stop-words.txt");
+		assertEquals("Not right word count", 4445, at.wordCount("God"));
+	}
+	
+	@Test
+	public void testWordCountBibleShakespeare() throws FileNotFoundException, IllegalArgumentException {
+		at = new AutoTester("files/bible_shakespeare.txt", "files/shakespeare-index.txt", "files/stop-words.txt");
+		assertEquals("Not right word count", 1620, at.wordCount("God"));
 	}
 	
 	@Test
