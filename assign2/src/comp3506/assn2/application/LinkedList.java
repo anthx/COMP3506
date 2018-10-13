@@ -8,10 +8,19 @@ public class LinkedList<T> implements Iterator<Object> {
 	int size;
 	private ListNode<T> current;
 	
+	/**
+	 * Constructor
+	 */
 	public LinkedList() {
 		size = 0;
 	}
 	
+	/**
+	 * Adds a new element to LinkedList
+	 * O(1) - just creating a new object and re-reference everything
+	 * Space: O(1) 3 pointers then the method is done.
+	 * @param element
+	 */
 	public void add(T element) {
 		ListNode<T> aNode = new ListNode<>(element);
 		aNode.previous = tail;
@@ -28,6 +37,11 @@ public class LinkedList<T> implements Iterator<Object> {
 		size++;
 	}
 	
+	/**
+	 * Appends an existing LinkedList to this one.
+	 * O(1) - just referencing and adding size int together. 
+	 * @param list
+	 */
 	public void append(LinkedList<T> list) {
 		if (tail != null) {
 			tail.next = list.head;
@@ -44,15 +58,28 @@ public class LinkedList<T> implements Iterator<Object> {
 		
 	}
 
+	/**
+	 * Getter for head element
+	 * O(1)
+	 * @return
+	 */
 	public ListNode<T> getHead() {
 		return head;
 	}
 
+	/**
+	 * Getter for has next boolean.
+	 * O(1)
+	 */
 	@Override
 	public boolean hasNext() {
 		return current != null;
 	}
 
+	/**
+	 * Getter for next element
+	 * O(1)
+	 */
 	@Override
 	public ListNode<T> next() {
 		ListNode<T> temp = current;
