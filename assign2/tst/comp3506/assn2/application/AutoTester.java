@@ -25,7 +25,7 @@ import comp3506.assn2.utils.Misc;
 public class AutoTester implements Search {
 
 	String[] stopWords = new String[500];
-	Pair[] sectionIndex = new Pair[100];
+	Pair<String, Integer>[] sectionIndex = new Pair[100];
 	Trie theTrie;
 	LinkedList<String> listOfLines = new LinkedList<String>();
 
@@ -55,8 +55,6 @@ public class AutoTester implements Search {
 	 */
 	public AutoTester(String documentFileName, String indexFileName, String stopWordsFileName)
 			throws FileNotFoundException, IllegalArgumentException {
-		// TODO Implement constructor to load the data from these files and
-		// TODO setup your data structures for the application.
 
 		// Reads Stop Words
 		try {
@@ -110,7 +108,6 @@ public class AutoTester implements Search {
 					if (wordsOnLine != null && wordsOnLine.length > 0) {
 						for (Occurence word : wordsOnLine) {
 							if (word != null) {
-//								System.out.println(line);
 								theTrie.addWord(word.getWord(), lineNumber, word.getStartingColumn());
 							}
 						}
