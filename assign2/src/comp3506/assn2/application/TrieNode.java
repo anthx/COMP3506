@@ -34,7 +34,7 @@ public class TrieNode {
 		isEnd = false;
 	}
 	
-	public void isEnd() {
+	void isEnd() {
 		isEnd = true;
 	}
 	

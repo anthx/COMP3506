@@ -1,32 +1,24 @@
 package comp3506.assn2.utils;
 
 public class Misc {
-
+	/**
+	 * trims non letters
+	 * O(L) where L = length of word. Regex black box which should be slower for a longer string.
+	 * @param word
+	 * @return
+	 */
 	public static String trimNonLetters(String word) {
-		word = word + " ";
-		// TODO maybe find a better way of fixing words without losing data.
 		word = word.trim().toLowerCase().replaceAll("[^a-z]", "");
-		
-//		if (word.length() > 0) {
-//			try {
-//				int index = word.charAt(0) - 'a';
-//				if (index > 25 || index < 0) {
-//					word = word.substring(1);
-//				}
-//			} catch (Exception e) {
-//				// TODO: handle exception
-//			}
-//		}
-//
-//		if (word.length() > 1) {
-//			int indexEnd = word.charAt(word.length() - 1) - 'a';
-//			if (indexEnd > 25 || indexEnd < 0) {
-//				word = word.substring(0, word.length() - 1);
-//			}
-//		}
 		return word;
 	}
 
+	/**
+	 * Finds column occurrences of each word on the line.
+	 * O(W) where W = words in line. Plus some constants which get collapsed. 
+	 * @param line
+	 * @param lineNumber
+	 * @return
+	 */
 	public static Occurence[] processLine(String line, int lineNumber) {
 		String[] words = line.toLowerCase().split("[ -]");
 		Occurence[] result = new Occurence[words.length];

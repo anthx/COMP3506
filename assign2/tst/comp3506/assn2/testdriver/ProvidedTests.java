@@ -93,14 +93,14 @@ public class ProvidedTests {
 		assertThat("Search for 'obscure' returned wrong number of results.", searchResult, hasSize(expected.size()));
 	}
 
-	@Test(timeout=500)
+	@Test(timeout=0)
 	public void testWordsOnLine() {
 		String [] searchTerm = {"riper", "decease"};
 		List<Integer> expected = Arrays.asList(13);
 		assertThat("Location of 'riper' && 'decease' were not expected.", searchApplication.wordsOnLine(searchTerm), is(expected));
 	}
 
-	@Test(timeout=500)
+	@Test(timeout=0)
 	public void testSomeWordsOnLine() {
 		String [] searchTerm = {"boggler", "carlot"};
 		List<Integer> expected = Arrays.asList(8416, 11839);

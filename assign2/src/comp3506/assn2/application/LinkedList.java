@@ -60,8 +60,8 @@ public class LinkedList<T> implements Iterator<Object> {
 
 	/**
 	 * Getter for head element
-	 * O(1)
-	 * @return
+	 * O(1) referencing only
+	 * @return the head
 	 */
 	public ListNode<T> getHead() {
 		return head;
@@ -69,7 +69,7 @@ public class LinkedList<T> implements Iterator<Object> {
 
 	/**
 	 * Getter for has next boolean.
-	 * O(1)
+	 * O(1) referencing only
 	 */
 	@Override
 	public boolean hasNext() {
@@ -78,12 +78,22 @@ public class LinkedList<T> implements Iterator<Object> {
 
 	/**
 	 * Getter for next element
-	 * O(1)
+	 * O(1) referencing only
 	 */
 	@Override
 	public ListNode<T> next() {
 		ListNode<T> temp = current;
 		current = current.next;
 		return temp;
+	}
+	
+	/**
+	 * Resets the iterator
+	 * O(1) referencing only
+	 */
+	public void reset() {
+		if (current == null) {
+			current = head;
+		}
 	}
 }

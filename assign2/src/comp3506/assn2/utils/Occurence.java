@@ -15,18 +15,38 @@ public class Occurence {
 		this.lineNumber = lineNumber;
 	}
 	
+	/**
+	 * Getter for the word
+	 * O(1) it's a getter
+	 * @return
+	 */
 	public String getWord() {
 		return word;
 	}
 	
+	/**
+	 * Getter for the line number
+	 * O(1) it's a getter
+	 * @return
+	 */
 	public int getLineNumebr() {
 		return lineNumber;
 	}
 	
+	/**
+	 * Getter for column
+	 * O(1) it's a getter
+	 * @return
+	 */
 	public int getStartingColumn() {
 		return startingColumn;
 	}
 	
+	/**
+	 * To String for debugging
+	 * O(1) just concatenating strings....
+	 * @return
+	 */
 	public String toString() {
 		return word + ":" + lineNumber + ":" + startingColumn;
 	}
